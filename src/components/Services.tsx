@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Globe, Search, Megaphone, PenTool, BarChart3, Users } from "lucide-react";
+import { useRef } from "react";
 
 const services = [
   {
@@ -40,74 +41,119 @@ const services = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 const Services = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const headerY = useTransform(scrollYProgress, [0, 0.5], [80, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+
   return (
-    <section id="servicios" className="section-padding">
-      <div className="container mx-auto">
-        {/* Section header */}
+    <section id="servicios" ref={sectionRef} className="section-padding relative overflow-hidden">
+      {/* Animated background pattern */}
+      <motion.div 
+        style={{ y: backgroundY }}
+        className="absolute inset-0 opacity-30"
+      >
+        <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-gradient-to-br from-primary/10 to-transparent blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 h-80 w-80 rounded-full bg-gradient-to-tr from-primary/10 to-transparent blur-3xl" />
+      </motion.div>
+
+      <div className="container mx-auto relative z-10">
+        {/* Section header with parallax */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          style={{ y: headerY, opacity }}
           className="mb-12 text-center md:mb-16"
         >
-          <div className="mb-4 flex justify-center">
-            <div className="accent-line" />
-          </div>
-          <h2 className="mb-4 font-serif text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
+          <motion.div 
+            initial={{ width: 0 }}
+            whileInView={{ width: "4rem" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-4 mx-auto h-1 rounded-full bg-gradient-to-r from-primary to-primary/60"
+          />
+          <motion.h2 
+            initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="mb-4 font-serif text-3xl font-bold text-foreground md:text-4xl lg:text-5xl"
+          >
             Servicios Principales
-          </h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mx-auto max-w-2xl text-lg text-muted-foreground"
+          >
             Soluciones integrales de marketing digital diseñadas específicamente para el sector médico y estético.
-          </p>
+          </motion.p>
         </motion.div>
 
-        {/* Services grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-        >
+        {/* Services grid with 3D-like staggered reveal */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <motion.div
               key={index}
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 80, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ 
+                duration: 0.7, 
+                delay: index * 0.08,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+              whileHover={{ 
+                y: -12,
+                scale: 1.02,
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}
               className="card-service group"
             >
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+              <motion.div 
+                className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"
+                whileHover={{ 
+                  scale: 1.15, 
+                  rotate: -5,
+                  transition: { type: "spring", stiffness: 400 }
+                }}
+              >
                 <service.icon className="h-7 w-7" />
-              </div>
+              </motion.div>
               <h3 className="mb-3 text-xl font-semibold text-foreground">
                 {service.title}
               </h3>
               <p className="mb-4 text-muted-foreground">{service.description}</p>
               <ul className="space-y-2">
                 {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  <motion.li 
+                    key={idx} 
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
+                    className="flex items-center gap-2 text-sm text-muted-foreground"
+                  >
+                    <motion.span 
+                      className="h-1.5 w-1.5 rounded-full bg-primary"
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.4 + idx * 0.1 }}
+                    />
                     {feature}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
