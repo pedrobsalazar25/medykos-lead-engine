@@ -1,0 +1,18 @@
+{
+  "name": "Medykos - Marketing Médico",
+  "short_name": "Medykos",
+  "description": "Agencia especializada en marketing digital para médicos, clínicas y centros estéticos",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1f",
+  "theme_color": "#E53935",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["business", "medical", "marketing"]
+}
