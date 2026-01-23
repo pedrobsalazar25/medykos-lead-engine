@@ -1,10 +1,11 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useRef } from "react";
 
 const faqs = [
   {
@@ -34,50 +35,100 @@ const faqs = [
 ];
 
 const FAQ = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
+  const headerY = useTransform(scrollYProgress, [0, 0.4], [40, 0]);
+
   return (
-    <section id="faq" className="section-padding bg-secondary/30">
-      <div className="container mx-auto">
-        {/* Section header */}
+    <section id="faq" ref={sectionRef} className="section-padding bg-secondary/30 relative overflow-hidden">
+      {/* Parallax background */}
+      <motion.div 
+        style={{ y: bgY }}
+        className="absolute inset-0 pointer-events-none"
+      >
+        <div className="absolute top-1/3 left-0 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute bottom-1/3 right-0 h-72 w-72 rounded-full bg-primary/5 blur-3xl" />
+      </motion.div>
+
+      <div className="container mx-auto relative z-10">
+        {/* Section header with parallax */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          style={{ y: headerY }}
           className="mb-12 text-center md:mb-16"
         >
-          <div className="mb-4 flex justify-center">
-            <div className="accent-line" />
-          </div>
-          <h2 className="mb-4 font-serif text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
+          <motion.div 
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="mb-4 flex justify-center"
+          >
+            <div className="accent-line origin-center" />
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="mb-4 font-serif text-3xl font-bold text-foreground md:text-4xl lg:text-5xl"
+          >
             Preguntas Frecuentes
-          </h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mx-auto max-w-2xl text-lg text-muted-foreground"
+          >
             Resolvemos tus dudas sobre nuestros servicios de marketing médico.
-          </p>
+          </motion.p>
         </motion.div>
 
-        {/* FAQ Accordion */}
+        {/* FAQ Accordion with staggered animation */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5 }}
           className="mx-auto max-w-3xl"
         >
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem
+              <motion.div
                 key={index}
-                value={`item-${index}`}
-                className="rounded-xl border-none bg-card px-6 shadow-sm"
+                initial={{ opacity: 0, y: 30, x: index % 2 === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, y: 0, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.08,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
               >
-                <AccordionTrigger className="faq-trigger text-left text-lg font-medium hover:no-underline">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="pb-5 text-muted-foreground">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+                <AccordionItem
+                  value={`item-${index}`}
+                  className="rounded-xl border-none bg-card px-6 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <AccordionTrigger className="faq-trigger text-left text-lg font-medium hover:no-underline">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-5 text-muted-foreground">
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {faq.answer}
+                    </motion.div>
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
             ))}
           </Accordion>
         </motion.div>
