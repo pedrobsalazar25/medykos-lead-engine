@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
@@ -12,6 +12,20 @@ const navItems = [
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollY } = useScroll();
+  
+  // Transform for header shrink effect
+  const headerPadding = useTransform(scrollY, [0, 100], [16, 8]);
+  const logoScale = useTransform(scrollY, [0, 100], [1, 0.9]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -22,15 +36,33 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50">
-      <div className="bg-hero/80 backdrop-blur-lg">
-        <div className="container mx-auto flex items-center justify-between px-5 py-4 md:px-8">
+    <header 
+      className="fixed left-0 right-0 top-0 z-50"
+      style={{ paddingTop: "env(safe-area-inset-top)" }}
+    >
+      <motion.div 
+        className={`backdrop-blur-xl transition-colors duration-300 ${
+          isScrolled ? "bg-hero/95 shadow-lg" : "bg-hero/80"
+        }`}
+      >
+        <motion.div 
+          className="container mx-auto flex items-center justify-between px-5 md:px-8"
+          style={{ paddingTop: headerPadding, paddingBottom: headerPadding }}
+        >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <span className="font-serif text-2xl font-bold text-hero-foreground">
+          <motion.a 
+            href="#" 
+            className="flex items-center gap-2"
+            style={{ scale: logoScale }}
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            <span className="font-serif text-xl md:text-2xl font-bold text-hero-foreground">
               Medykos
             </span>
-          </a>
+          </motion.a>
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 md:flex">
@@ -59,31 +91,33 @@ const Header = () => {
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Mobile Menu */}
       <motion.div
         initial={false}
         animate={isMenuOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
-        className="overflow-hidden bg-hero/95 backdrop-blur-lg md:hidden"
+        className="overflow-hidden bg-hero/98 backdrop-blur-xl md:hidden"
       >
-        <nav className="container mx-auto flex flex-col gap-4 px-5 py-6">
+        <nav className="container mx-auto flex flex-col gap-3 px-5 py-5">
           {navItems.map((item) => (
-            <button
+            <motion.button
               key={item.href}
               onClick={() => scrollToSection(item.href)}
-              className="py-2 text-left text-lg font-medium text-hero-foreground/80 transition-colors hover:text-hero-foreground"
+              whileTap={{ scale: 0.98 }}
+              className="py-3 px-4 text-left text-base font-medium text-hero-foreground/80 transition-colors hover:text-hero-foreground active:bg-white/5 rounded-xl"
             >
               {item.label}
-            </button>
+            </motion.button>
           ))}
-          <button
+          <motion.button
             onClick={() => scrollToSection("#contacto")}
-            className="mt-2 rounded-lg bg-primary px-5 py-3 text-center font-semibold text-primary-foreground"
+            whileTap={{ scale: 0.98 }}
+            className="mt-2 rounded-xl bg-primary px-5 py-3.5 text-center font-semibold text-primary-foreground active:bg-primary/90"
           >
             Consulta Gratuita
-          </button>
+          </motion.button>
         </nav>
       </motion.div>
     </header>

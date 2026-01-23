@@ -9,12 +9,13 @@ import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BottomNav from "@/components/BottomNav";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <main>
+      <main className="pb-20 md:pb-0">
         <HeroSlider />
         <WhyMedykos />
         <Services />
@@ -26,6 +27,7 @@ const Index = () => {
       </main>
       <Footer />
       <WhatsAppButton />
+      <BottomNav />
     </div>
   );
 };

@@ -116,15 +116,43 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    /* Safe area padding for modern devices */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Hide scrollbar on mobile for cleaner app feel */
+  @media (max-width: 768px) {
+    body::-webkit-scrollbar {
+      display: none;
+    }
+    body {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   }
 
   h1, h2, h3 {
     font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  /* Prevent text selection on interactive elements for app feel */
+  button, a {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Active states for tactile feedback */
+  .tap-highlight-none {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
