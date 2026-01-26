@@ -17,7 +17,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <h3 className="mb-4 font-heading text-2xl font-bold text-surface-dark-foreground">
-              Medykos
+              Medikos
             </h3>
             <p className="mb-6 max-w-md text-surface-dark-foreground/70">
               Agencia especializada en marketing digital para el sector médico y estético. Ayudamos a profesionales de la salud a destacar online y captar más pacientes.
@@ -83,7 +83,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="mt-12 border-t border-surface-dark-foreground/10 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 text-sm text-surface-dark-foreground/50 md:flex-row">
-            <p>© {currentYear} Medykos. Todos los derechos reservados.</p>
+            <p>© {currentYear} Medikos. Todos los derechos reservados.</p>
             <div className="flex gap-6">
               <button className="transition-colors hover:text-surface-dark-foreground">
                 Política de Privacidad

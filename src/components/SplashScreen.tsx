@@ -108,7 +108,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="inline-block"
                 >
-                  Medy
+                  Medi
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, x: 20 }}

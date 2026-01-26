@@ -130,7 +130,7 @@ const HeroSlider = () => {
                 className="mb-6 inline-flex items-center gap-2 rounded-full border border-hero-foreground/20 bg-hero-foreground/10 px-4 py-2 backdrop-blur-sm"
               >
                 <span className="text-sm font-medium text-hero-foreground">
-                  Medykos
+                  Medikos
                 </span>
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 <span className="text-sm text-hero-foreground/70">

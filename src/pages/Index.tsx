@@ -14,7 +14,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import BottomNav from "@/components/BottomNav";
 import SplashScreen from "@/components/SplashScreen";
 
-const SPLASH_SHOWN_KEY = "medykos_splash_shown";
+const SPLASH_SHOWN_KEY = "medikos_splash_shown";
 
 const Index = () => {
   const [showSplash, setShowSplash] = useState(() => {

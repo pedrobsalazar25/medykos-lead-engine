@@ -9,7 +9,7 @@ import { useRef } from "react";
 
 const faqs = [
   {
-    question: "¿Qué hace diferente a Medykos de otras agencias de marketing?",
+    question: "¿Qué hace diferente a Medikos de otras agencias de marketing?",
     answer: "Nos especializamos exclusivamente en el sector médico y estético. Entendemos las regulaciones, la ética médica y las sensibilidades del sector salud. No trabajamos con otros sectores, lo que nos permite ofrecer un servicio más especializado y efectivo.",
   },
   {
