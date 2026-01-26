@@ -81,7 +81,7 @@ const WhyMedykos = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-4 font-heading text-3xl font-bold text-foreground md:text-4xl lg:text-5xl"
           >
-            ¿Por qué Medykos?
+            ¿Por qué Medikos?
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}

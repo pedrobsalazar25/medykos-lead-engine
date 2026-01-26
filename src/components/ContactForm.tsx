@@ -65,7 +65,7 @@ const ContactForm = () => {
     }
 
     const message = `Hola, mi nombre es ${formData.nombre}.
-Quiero solicitar una consulta gratuita con Medykos.
+Quiero solicitar una consulta gratuita con Medikos.
 
 Email: ${formData.email}
 Fecha preferida de consulta: ${formData.fecha}
