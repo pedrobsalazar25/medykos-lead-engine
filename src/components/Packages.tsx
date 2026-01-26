@@ -6,8 +6,8 @@ const packages = [
   {
     name: "Esencial",
     subtitle: "Para clínicas que inician",
-    price: "Desde 1.200€",
-    period: "pago único",
+    price: "290€",
+    period: "/mes",
     featured: false,
     features: [
       "Diseño web profesional (hasta 5 páginas)",
@@ -16,26 +16,26 @@ const packages = [
       "Formulario de contacto",
       "Integración con Google Analytics",
       "SSL incluido",
-      "1 mes de soporte",
+      "Soporte por email",
     ],
     cta: "Solicitar información",
   },
   {
     name: "Premium",
     subtitle: "Para clínicas que quieren destacar",
-    price: "Desde 2.500€",
-    period: "pago único",
+    price: "400€",
+    period: "/mes",
     featured: true,
     features: [
       "Todo lo del paquete Esencial",
       "Hasta 10 páginas personalizadas",
       "SEO avanzado on-page",
       "Blog integrado",
-      "Sistema de citas online",
+      "Sistema de citas por WhatsApp",
       "Chat en vivo",
       "Integración con CRM",
       "Optimización de velocidad",
-      "3 meses de soporte",
+      "Soporte prioritario 24/7",
     ],
     cta: "Solicitar información",
   },
@@ -89,12 +89,12 @@ const Packages = () => {
           >
             <div className="accent-line origin-center" />
           </motion.div>
-          <motion.h2 
+            <motion.h2 
             initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="mb-4 font-serif text-3xl font-bold text-foreground md:text-4xl lg:text-5xl"
+            className="mb-4 font-heading text-3xl font-bold text-foreground md:text-4xl lg:text-5xl"
           >
             Paquetes de Diseño Web
           </motion.h2>

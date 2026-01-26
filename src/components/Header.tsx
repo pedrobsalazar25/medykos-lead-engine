@@ -59,7 +59,7 @@ const Header = () => {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
-            <span className="font-serif text-xl md:text-2xl font-bold text-hero-foreground">
+            <span className="font-heading text-xl md:text-2xl font-bold text-hero-foreground">
               Medykos
             </span>
           </motion.a>

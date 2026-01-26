@@ -9,20 +9,20 @@ const slides = [
   {
     id: 1,
     image: heroBg1,
-    headline: "Marketing médico que atrae pacientes, no solo clics",
-    subheadline: "Estrategias digitales diseñadas para médicos, clínicas y centros estéticos.",
+    headline: "Marketing digital que conecta pacientes con tu clínica",
+    subheadline: "Estrategias probadas para médicos, clínicas y centros de salud.",
   },
   {
     id: 2,
     image: heroBg2,
-    headline: "Especialistas en marketing médico y estético",
-    subheadline: "Más de 10 años ayudando a profesionales de la salud a destacar online.",
+    headline: "Tu equipo de marketing médico especializado",
+    subheadline: "Más de 10 años posicionando profesionales de la salud online.",
   },
   {
     id: 3,
     image: heroBg3,
-    headline: "Convierte tu web en una máquina de captación de pacientes",
-    subheadline: "Diseño web, SEO, Google Ads y contenidos médicos orientados a resultados.",
+    headline: "Citas por WhatsApp: la forma más fácil de agendar pacientes",
+    subheadline: "Tus pacientes pueden reservar cita directamente desde su móvil. Simple, rápido y efectivo.",
   },
 ];
 
@@ -139,7 +139,7 @@ const HeroSlider = () => {
               </motion.div>
 
               {/* Headline */}
-              <h1 className="mb-6 font-serif text-3xl font-bold leading-tight text-hero-foreground md:text-5xl lg:text-6xl">
+              <h1 className="mb-6 font-heading text-3xl font-bold leading-tight text-hero-foreground md:text-5xl lg:text-6xl">
                 {slides[currentSlide].headline}
               </h1>
 
