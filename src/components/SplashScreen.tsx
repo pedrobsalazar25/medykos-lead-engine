@@ -100,7 +100,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               
               {/* Logo text */}
               <motion.h1
-                className="relative font-serif text-5xl font-bold text-hero-foreground md:text-6xl"
+                className="relative font-heading text-5xl font-bold text-hero-foreground md:text-6xl"
               >
                 <motion.span
                   initial={{ opacity: 0, x: -20 }}

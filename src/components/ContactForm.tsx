@@ -128,7 +128,7 @@ Comentarios: ${formData.comentarios || "Sin comentarios adicionales"}`;
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="mb-4 font-serif text-3xl font-bold text-foreground md:text-4xl"
+                  className="mb-4 font-heading text-3xl font-bold text-foreground md:text-4xl"
                 >
                   Agenda tu consulta gratuita
                 </motion.h2>

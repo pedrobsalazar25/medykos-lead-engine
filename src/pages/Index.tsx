@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
+import WhatsAppFeature from "@/components/WhatsAppFeature";
 import WhyMedykos from "@/components/WhyMedykos";
 import Services from "@/components/Services";
 import Packages from "@/components/Packages";
@@ -46,6 +47,7 @@ const Index = () => {
           <Header />
           <main className="pb-20 md:pb-0">
             <HeroSlider />
+            <WhatsAppFeature />
             <WhyMedykos />
             <Services />
             <Packages />

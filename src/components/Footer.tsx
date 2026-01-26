@@ -16,7 +16,7 @@ const Footer = () => {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <h3 className="mb-4 font-serif text-2xl font-bold text-surface-dark-foreground">
+            <h3 className="mb-4 font-heading text-2xl font-bold text-surface-dark-foreground">
               Medykos
             </h3>
             <p className="mb-6 max-w-md text-surface-dark-foreground/70">

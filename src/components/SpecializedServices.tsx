@@ -84,7 +84,7 @@ const SpecializedServices = () => {
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="mb-4 font-serif text-3xl font-bold text-surface-dark-foreground md:text-4xl lg:text-5xl"
+            className="mb-4 font-heading text-3xl font-bold text-surface-dark-foreground md:text-4xl lg:text-5xl"
           >
             Servicios Especializados
           </motion.h2>

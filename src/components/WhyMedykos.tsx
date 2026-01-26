@@ -79,7 +79,7 @@ const WhyMedykos = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-4 font-serif text-3xl font-bold text-foreground md:text-4xl lg:text-5xl"
+            className="mb-4 font-heading text-3xl font-bold text-foreground md:text-4xl lg:text-5xl"
           >
             ¿Por qué Medykos?
           </motion.h2>
