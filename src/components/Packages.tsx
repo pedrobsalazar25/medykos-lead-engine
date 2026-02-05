@@ -7,7 +7,6 @@ const packages = [
     name: "Esencial",
     subtitle: "Para clínicas que inician",
     price: "290€",
-    period: "/mes",
     featured: false,
     features: [
       "Diseño web profesional (hasta 5 páginas)",
@@ -24,7 +23,6 @@ const packages = [
     name: "Premium",
     subtitle: "Para clínicas que quieren destacar",
     price: "400€",
-    period: "/mes",
     featured: true,
     features: [
       "Todo lo del paquete Esencial",
@@ -163,7 +161,6 @@ const Packages = () => {
                     >
                       {pkg.price}
                     </motion.span>
-                    <span className="text-muted-foreground"> / {pkg.period}</span>
                   </div>
                   <ul className="mb-8 space-y-3">
                     {pkg.features.map((feature, idx) => (
