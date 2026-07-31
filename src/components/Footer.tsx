@@ -11,7 +11,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="section-dark">
+    <footer className="section-dark hidden md:block">
       <div className="container mx-auto px-5 py-12 md:px-8 md:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
