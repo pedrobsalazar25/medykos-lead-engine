@@ -6,7 +6,7 @@ const packages = [
   {
     name: "Esencial",
     subtitle: "Para clínicas que inician",
-    price: "290€",
+    price: "$390",
     featured: false,
     features: [
       "Diseño web profesional (hasta 5 páginas)",
@@ -22,7 +22,7 @@ const packages = [
   {
     name: "Premium",
     subtitle: "Para clínicas que quieren destacar",
-    price: "400€",
+    price: "$500",
     featured: true,
     features: [
       "Todo lo del paquete Esencial",
