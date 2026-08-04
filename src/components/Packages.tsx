@@ -152,7 +152,7 @@ const Packages = () => {
           </div>
           <p className="text-center text-sm text-muted-foreground">
             {billingCycle === "monthly"
-              ? "El pago mensual tiene un costo adicional de $70 USD."
+              ? "Dividido en 12 cuotas mensuales sin interés."
               : "Paga al contado y ahorra el costo extra mensual."}
           </p>
         </motion.div>
