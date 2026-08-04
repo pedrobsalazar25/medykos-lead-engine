@@ -135,8 +135,12 @@ const Header = () => {
                 </button>
               );
             })}
-
+            <button
+              onClick={() => scrollToSection("#contacto")}
+              className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
+            >
               Consulta Gratuita
+
             </button>
           </nav>
 
