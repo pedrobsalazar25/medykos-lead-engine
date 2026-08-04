@@ -1,24 +1,21 @@
-import { useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Calendar, Mail, MessageSquare, User, Send } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
+import { Calendar, MessageSquare } from "lucide-react";
 
-const WHATSAPP_NUMBER = "34604065849";
-
-const contactSchema = z.object({
-  nombre: z.string().trim().min(2, "El nombre debe tener al menos 2 caracteres").max(100, "Nombre demasiado largo"),
-  email: z.string().trim().email("Email inválido").max(255, "Email demasiado largo"),
-  fecha: z.string().min(1, "Por favor selecciona una fecha"),
-  comentarios: z.string().trim().max(1000, "Comentarios demasiado largos").optional(),
-});
+const FORM_SCRIPT_ID = "leadconnector-form-embed";
 
 const ContactForm = () => {
-  const { toast } = useToast();
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (document.getElementById(FORM_SCRIPT_ID)) return;
+    const script = document.createElement("script");
+    script.id = FORM_SCRIPT_ID;
+    script.src = "https://link.msgsndr.com/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -28,59 +25,6 @@ const ContactForm = () => {
   const leftColumnY = useTransform(scrollYProgress, [0, 1], [80, -40]);
   const rightColumnY = useTransform(scrollYProgress, [0, 1], [120, -20]);
 
-  const [formData, setFormData] = useState({
-    nombre: "",
-    email: "",
-    fecha: "",
-    comentarios: "",
-  });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const result = contactSchema.safeParse(formData);
-    if (!result.success) {
-      const newErrors: Record<string, string> = {};
-      result.error.errors.forEach((error) => {
-        if (error.path[0]) {
-          newErrors[error.path[0] as string] = error.message;
-        }
-      });
-      setErrors(newErrors);
-      toast({
-        title: "Error en el formulario",
-        description: "Por favor, revisa los campos marcados.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    const message = `Hola, mi nombre es ${formData.nombre}.
-Quiero solicitar una consulta gratuita con Medikos.
-
-Email: ${formData.email}
-Fecha preferida de consulta: ${formData.fecha}
-Comentarios: ${formData.comentarios || "Sin comentarios adicionales"}`;
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-
-    window.open(whatsappUrl, "_blank");
-
-    toast({
-      title: "¡Redirigiendo a WhatsApp!",
-      description: "Se abrirá una nueva pestaña con tu mensaje preparado.",
-    });
-  };
 
   return (
     <section id="contacto" ref={sectionRef} className="section-padding relative overflow-hidden">
@@ -183,118 +127,25 @@ Comentarios: ${formData.comentarios || "Sin comentarios adicionales"}`;
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
-                <form onSubmit={handleSubmit} className="rounded-2xl bg-card p-6 shadow-lg md:p-8 hover:shadow-xl transition-shadow">
-                  <div className="space-y-5">
-                    {/* Nombre */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.2 }}
-                      className="space-y-2"
-                    >
-                      <Label htmlFor="nombre" className="flex items-center gap-2 text-foreground">
-                        <User className="h-4 w-4 text-muted-foreground" />
-                        Nombre *
-                      </Label>
-                      <Input
-                        id="nombre"
-                        name="nombre"
-                        type="text"
-                        placeholder="Tu nombre completo"
-                        value={formData.nombre}
-                        onChange={handleChange}
-                        className={errors.nombre ? "border-destructive" : ""}
-                      />
-                      {errors.nombre && <p className="text-sm text-destructive">{errors.nombre}</p>}
-                    </motion.div>
-
-                    {/* Email */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.25 }}
-                      className="space-y-2"
-                    >
-                      <Label htmlFor="email" className="flex items-center gap-2 text-foreground">
-                        <Mail className="h-4 w-4 text-muted-foreground" />
-                        Email *
-                      </Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="tu@email.com"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className={errors.email ? "border-destructive" : ""}
-                      />
-                      {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
-                    </motion.div>
-
-                    {/* Fecha */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.3 }}
-                      className="space-y-2"
-                    >
-                      <Label htmlFor="fecha" className="flex items-center gap-2 text-foreground">
-                        <Calendar className="h-4 w-4 text-muted-foreground" />
-                        Fecha preferida de consulta *
-                      </Label>
-                      <Input
-                        id="fecha"
-                        name="fecha"
-                        type="date"
-                        value={formData.fecha}
-                        onChange={handleChange}
-                        min={new Date().toISOString().split("T")[0]}
-                        className={errors.fecha ? "border-destructive" : ""}
-                      />
-                      {errors.fecha && <p className="text-sm text-destructive">{errors.fecha}</p>}
-                    </motion.div>
-
-                    {/* Comentarios */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.35 }}
-                      className="space-y-2"
-                    >
-                      <Label htmlFor="comentarios" className="flex items-center gap-2 text-foreground">
-                        <MessageSquare className="h-4 w-4 text-muted-foreground" />
-                        Comentarios
-                      </Label>
-                      <Textarea
-                        id="comentarios"
-                        name="comentarios"
-                        placeholder="Cuéntanos sobre tu clínica y tus objetivos..."
-                        value={formData.comentarios}
-                        onChange={handleChange}
-                        rows={4}
-                      />
-                    </motion.div>
-
-                    {/* Submit button */}
-                    <motion.button
-                      type="submit"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.4 }}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="btn-hero flex w-full items-center justify-center gap-3"
-                    >
-                      <Send className="h-5 w-5" />
-                      Agendar consulta por WhatsApp
-                    </motion.button>
-                  </div>
-                </form>
+                <div className="overflow-hidden rounded-2xl bg-card p-2 shadow-lg hover:shadow-xl transition-shadow md:p-4">
+                  <iframe
+                    src="https://api.leadconnectorhq.com/widget/form/mqIOtSNfNAjWe2mR2oQr"
+                    id="inline-mqIOtSNfNAjWe2mR2oQr"
+                    title="Solicita tu cotización - other pages"
+                    data-layout="{'id':'INLINE'}"
+                    data-trigger-type="alwaysShow"
+                    data-trigger-value=""
+                    data-activation-type="alwaysActivated"
+                    data-activation-value=""
+                    data-deactivation-type="neverDeactivate"
+                    data-deactivation-value=""
+                    data-form-name="Solicita tu cotización - other pages"
+                    data-height="537"
+                    data-layout-iframe-id="inline-mqIOtSNfNAjWe2mR2oQr"
+                    data-form-id="mqIOtSNfNAjWe2mR2oQr"
+                    className="h-[560px] w-full rounded-lg border-none"
+                  />
+                </div>
               </motion.div>
             </motion.div>
           </div>
