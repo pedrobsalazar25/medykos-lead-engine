@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Tooth, Stethoscope, ExternalLink } from "lucide-react";
+import { Smile, Stethoscope, ExternalLink } from "lucide-react";
 
 const demos = [
   {
