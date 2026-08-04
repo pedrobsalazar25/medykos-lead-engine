@@ -58,11 +58,16 @@ const Header = () => {
   }, []);
 
   const scrollToSection = (href: string) => {
+    if (location.pathname !== "/") {
+      navigate(`/${href}`);
+      return;
+    }
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
 
   return (
     <header 
@@ -96,32 +101,41 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 md:flex">
             {navItems.map((item) => {
-              const isActive = activeSection === item.href.replace("#", "");
+              const isActive = item.to
+                ? location.pathname === item.to
+                : location.pathname === "/" && activeSection === item.href!.replace("#", "");
+              const className = `relative px-1 py-2 text-sm font-medium transition-colors duration-300 ${
+                isActive ? "text-primary" : "text-hero-foreground/80 hover:text-hero-foreground"
+              }`;
+              const underline = isActive ? (
+                <motion.div
+                  layoutId="activeNavUnderline"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-primary"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              ) : null;
+
+              if (item.to) {
+                return (
+                  <Link key={item.to} to={item.to} className={className}>
+                    {item.label}
+                    {underline}
+                  </Link>
+                );
+              }
+
               return (
                 <button
                   key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className={`relative px-1 py-2 text-sm font-medium transition-colors duration-300 ${
-                    isActive
-                      ? "text-primary"
-                      : "text-hero-foreground/80 hover:text-hero-foreground"
-                  }`}
+                  onClick={() => scrollToSection(item.href!)}
+                  className={className}
                 >
                   {item.label}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNavUnderline"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-primary"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  )}
+                  {underline}
                 </button>
               );
             })}
-            <button
-              onClick={() => scrollToSection("#contacto")}
-              className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
-            >
+
               Consulta Gratuita
             </button>
           </nav>
