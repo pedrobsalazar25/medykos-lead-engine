@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Home, Briefcase, Package, Monitor, HelpCircle, MessageCircle } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Home, Briefcase, Package, LayoutGrid, Monitor, MessageCircle } from "lucide-react";
 
 const navItems = [
   { id: "inicio", label: "Inicio", icon: Home, href: "#" },
   { id: "servicios", label: "Servicios", icon: Briefcase, href: "#servicios" },
   { id: "paquetes", label: "Paquetes", icon: Package, href: "#paquetes" },
+  { id: "funcionalidades", label: "Funciones", icon: LayoutGrid, to: "/funcionalidades" },
   { id: "demos", label: "Demos", icon: Monitor, href: "#demos" },
-  { id: "faq", label: "FAQ", icon: HelpCircle, href: "#faq" },
   { id: "contacto", label: "Contacto", icon: MessageCircle, href: "#contacto" },
 ];
 
+
 const BottomNav = () => {
   const [activeSection, setActiveSection] = useState("inicio");
+  const navigate = useNavigate();
+  const location = useLocation();
+
 
   useEffect(() => {
     const observerOptions = {
@@ -53,12 +58,21 @@ const BottomNav = () => {
     };
   }, []);
 
-  const scrollToSection = (href: string) => {
-    if (href === "#") {
+  const handleNav = (item: (typeof navItems)[number]) => {
+    if (item.to) {
+      navigate(item.to);
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
-    const element = document.querySelector(href);
+    if (location.pathname !== "/") {
+      navigate(item.href === "#" ? "/" : `/${item.href}`);
+      return;
+    }
+    if (item.href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const element = document.querySelector(item.href!);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -73,17 +87,20 @@ const BottomNav = () => {
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <div className="bg-hero/95 backdrop-blur-xl border-t border-white/10">
-        <div className="flex items-center justify-around px-2 py-2">
+        <div className="flex items-center justify-around px-1 py-2">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = activeSection === item.id;
+            const isActive = item.to
+              ? location.pathname === item.to
+              : location.pathname === "/" && activeSection === item.id;
 
             return (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.href)}
-                className="relative flex flex-col items-center justify-center px-3 py-2 min-w-[60px] tap-highlight-none active:scale-95 transition-transform"
+                onClick={() => handleNav(item)}
+                className="relative flex flex-col items-center justify-center px-2 py-2 min-w-[56px] tap-highlight-none active:scale-95 transition-transform"
               >
+
                 <motion.div
                   animate={{
                     scale: isActive ? 1.15 : 1,
