@@ -6,6 +6,7 @@ import WhyMedykos from "@/components/WhyMedykos";
 import Services from "@/components/Services";
 import Packages from "@/components/Packages";
 import Process from "@/components/Process";
+import Portfolio from "@/components/Portfolio";
 import SpecializedServices from "@/components/SpecializedServices";
 import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
