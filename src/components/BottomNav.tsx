@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Home, Briefcase, Package, Monitor, HelpCircle, MessageCircle } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Home, Briefcase, Package, LayoutGrid, Monitor, MessageCircle } from "lucide-react";
 
 const navItems = [
   { id: "inicio", label: "Inicio", icon: Home, href: "#" },
   { id: "servicios", label: "Servicios", icon: Briefcase, href: "#servicios" },
   { id: "paquetes", label: "Paquetes", icon: Package, href: "#paquetes" },
+  { id: "funcionalidades", label: "Funciones", icon: LayoutGrid, to: "/funcionalidades" },
   { id: "demos", label: "Demos", icon: Monitor, href: "#demos" },
-  { id: "faq", label: "FAQ", icon: HelpCircle, href: "#faq" },
   { id: "contacto", label: "Contacto", icon: MessageCircle, href: "#contacto" },
 ];
+
 
 const BottomNav = () => {
   const [activeSection, setActiveSection] = useState("inicio");

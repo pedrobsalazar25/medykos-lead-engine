@@ -17,6 +17,9 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const { scrollY } = useScroll();
+  const location = useLocation();
+  const navigate = useNavigate();
+
 
   // Transform for header shrink effect
   const headerPadding = useTransform(scrollY, [0, 100], [16, 8]);
