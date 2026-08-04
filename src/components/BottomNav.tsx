@@ -15,6 +15,9 @@ const navItems = [
 
 const BottomNav = () => {
   const [activeSection, setActiveSection] = useState("inicio");
+  const navigate = useNavigate();
+  const location = useLocation();
+
 
   useEffect(() => {
     const observerOptions = {
