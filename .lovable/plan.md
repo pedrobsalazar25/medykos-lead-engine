@@ -1,118 +1,31 @@
+# Plan: Sección de Preguntas Frecuentes sobre Pago Mensual vs Anual
 
-# Plan: Transformar la Página en una Experiencia Tipo App Móvil
+## Objetivo
+Añadir un grupo específico de preguntas frecuentes dentro de la sección FAQ existente para aclarar dudas sobre los planes de pago mensual y anual, usando únicamente la información disponible en el proyecto.
 
-## Descripcion General
-Vamos a aplicar una serie de mejoras para que la landing page de Medykos se sienta y se comporte como una aplicación móvil nativa, manteniendo la funcionalidad actual pero optimizando la experiencia tactil, visual y de navegacion.
+## Cambios propuestos
 
----
+### 1. FAQ.tsx — Nuevo grupo de preguntas sobre pagos
+Dentro del componente `src/components/FAQ.tsx`, agregar un segundo bloque titulado **"Pago mensual vs Pago anual"** debajo del acordeón general existente. Incluirá 4 ítems:
 
-## Cambios Principales
+1. **¿Cuál es la diferencia entre pago mensual y pago anual?**
+   - Pago anual: pago único por el precio base del paquete.
+   - Pago mensual: el precio base se incrementa en $70 USD y se divide en 12 cuotas mensuales sin interés.
 
-### 1. Navegacion Inferior Tipo App (Bottom Navigation)
-Crear una barra de navegacion fija en la parte inferior de la pantalla (solo en movil) con iconos para acceso rapido a las secciones principales.
+2. **¿Qué ocurre cuando termina el período de pago?**
+   - Responder con la información disponible: el pago anual es un pago único; para dudas sobre renovación, invitar al contacto por WhatsApp.
 
-- Iconos: Inicio, Servicios, Paquetes, FAQ, Contacto
-- Navegacion activa resaltada con color primario
-- Animaciones suaves al cambiar de seccion
-- Oculta en desktop, visible solo en mobile
+3. **¿Puedo cancelar antes de terminar las 12 cuotas?**
+   - Indicar que las condiciones de cancelación se coordinan directamente por WhatsApp, ya que no hay una política publicada en el sitio.
 
-### 2. Meta Tags para Comportamiento de App
-Agregar meta tags al `index.html` para:
-- Permitir instalacion como PWA (Progressive Web App)
-- Ocultar la barra del navegador en modo standalone
-- Configurar splash screen y colores del tema
-- Prevenir zoom no deseado en formularios
+4. **¿Qué métodos de pago aceptan?**
+   - Indicar que los métodos de pago disponibles se confirman al solicitar información, usando el canal de contacto principal del sitio (WhatsApp).
 
-### 3. Gestos y Transiciones Nativas
-- Agregar feedback tactil con animaciones de "press" en todos los botones
-- Transiciones de pagina mas fluidas entre secciones
-- Pull-to-refresh visual (indicador de scroll superior)
-- Momentum scroll nativo en iOS
+### 2. Estilo y estructura
+- Mantener el estilo visual del acordeón existente (tarjetas redondeadas, sombra suave, animaciones con Framer Motion).
+- Usar un subtítulo o etiqueta para diferenciar el nuevo grupo del FAQ general.
+- No agregar información inventada ni políticas que no estén en el código o la memoria del proyecto.
 
-### 4. Header Compacto Tipo App
-Modificar el header para que sea mas compacto en mobile:
-- Logo centrado mas pequeno
-- Solo icono de menu hamburguesa
-- Efecto de "shrink" al hacer scroll
-
-### 5. Safe Areas para Dispositivos Modernos
-Agregar padding para los "notches" de iPhones y Android:
-- Respetar el area segura inferior
-- Padding superior para la barra de estado
-
-### 6. Estados de Carga y Feedback Visual
-- Skeleton loaders para imagenes
-- Indicadores de carga tactil
-- Toasts posicionados de forma no intrusiva
-
-### 7. Snap Scroll Entre Secciones (Opcional)
-Scroll que "encaja" naturalmente en cada seccion al hacer scroll, simulando pantallas de app.
-
----
-
-## Archivos a Modificar
-
-| Archivo | Cambio |
-|---------|--------|
-| `index.html` | Meta tags PWA, viewport seguro, manifest |
-| `src/index.css` | Safe areas, scroll snap, estados tactiles |
-| `src/components/Header.tsx` | Header compacto animado |
-| `src/pages/Index.tsx` | Importar BottomNav |
-
-## Archivos a Crear
-
-| Archivo | Proposito |
-|---------|-----------|
-| `src/components/BottomNav.tsx` | Barra de navegacion inferior para movil |
-| `public/manifest.json` | Configuracion PWA |
-
----
-
-## Detalles Tecnicos
-
-### Meta Tags PWA (index.html)
-```text
-- apple-mobile-web-app-capable: yes
-- apple-mobile-web-app-status-bar-style: black-translucent
-- viewport con viewport-fit=cover
-- Link a manifest.json
-```
-
-### Bottom Navigation (BottomNav.tsx)
-```text
-Componente React con:
-- Posicion fixed bottom-0
-- 5 iconos con etiquetas
-- Deteccion de seccion activa via IntersectionObserver
-- Animaciones con Framer Motion
-- Solo visible en mobile (hidden md:hidden)
-- Safe area padding inferior
-```
-
-### Estilos CSS Adicionales
-```text
-- env(safe-area-inset-bottom) para area segura
-- scroll-snap-type: y mandatory para secciones
-- -webkit-tap-highlight-color transparente
-- touch-action: manipulation
-- Estados :active con scale transform
-```
-
-### Header Compacto
-```text
-- Reducir altura en mobile a 56px
-- Logo mas pequeno (text-xl)
-- Agregar backdrop-blur mas intenso
-- Animacion de shrink al scroll
-```
-
----
-
-## Resultado Esperado
-
-La pagina se sentira como una app nativa con:
-- Navegacion rapida desde la barra inferior
-- Instalable en la pantalla de inicio del telefono
-- Respuesta tactil inmediata en cada interaccion
-- Aprovechamiento completo de la pantalla
-- Transiciones fluidas entre secciones
+### 3. Verificación
+- Ejecutar `bun run build` para confirmar que el componente compila sin errores.
+- Revisar visualmente la sección FAQ en el preview para asegurar que el nuevo grupo se integra correctamente.
