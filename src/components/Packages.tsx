@@ -1,12 +1,12 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Check, Star } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const packages = [
   {
     name: "Esencial",
     subtitle: "Para clínicas que inician",
-    price: "$390",
+    price: 390,
     featured: false,
     features: [
       "Diseño web profesional (hasta 5 páginas)",
@@ -22,7 +22,7 @@ const packages = [
   {
     name: "Premium",
     subtitle: "Para clínicas que quieren destacar",
-    price: "$500",
+    price: 500,
     featured: true,
     features: [
       "Todo lo del paquete Esencial",
@@ -39,7 +39,10 @@ const packages = [
   },
 ];
 
+type BillingCycle = "monthly" | "annual";
+
 const Packages = () => {
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -56,6 +59,8 @@ const Packages = () => {
       contactSection.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const formatPrice = (price: number) => `$${price} USD`;
 
   return (
     <section id="paquetes" ref={sectionRef} className="section-padding bg-secondary/30 relative overflow-hidden">
@@ -76,7 +81,7 @@ const Packages = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mb-12 text-center md:mb-16"
+          className="mb-8 text-center md:mb-10"
         >
           <motion.div 
             initial={{ scaleX: 0, opacity: 0 }}
@@ -105,6 +110,51 @@ const Packages = () => {
           >
             Soluciones adaptadas a las necesidades de cada clínica médica o centro estético.
           </motion.p>
+        </motion.div>
+
+        {/* Billing cycle tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mb-10 flex flex-col items-center justify-center gap-3"
+        >
+          <div
+            role="tablist"
+            aria-label="Opciones de pago"
+            className="inline-flex rounded-full border border-primary/20 bg-background/80 p-1 backdrop-blur-sm"
+          >
+            <button
+              role="tab"
+              aria-selected={billingCycle === "monthly"}
+              onClick={() => setBillingCycle("monthly")}
+              className={`relative rounded-full px-5 py-2 text-sm font-semibold transition-all md:px-6 md:text-base ${
+                billingCycle === "monthly"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Pago mensual
+            </button>
+            <button
+              role="tab"
+              aria-selected={billingCycle === "annual"}
+              onClick={() => setBillingCycle("annual")}
+              className={`relative rounded-full px-5 py-2 text-sm font-semibold transition-all md:px-6 md:text-base ${
+                billingCycle === "annual"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Pago anual
+            </button>
+          </div>
+          <p className="text-center text-sm text-muted-foreground">
+            {billingCycle === "monthly"
+              ? "El pago mensual tiene un costo adicional de $70 USD."
+              : "Paga al contado y ahorra el costo extra mensual."}
+          </p>
         </motion.div>
 
         {/* Packages grid with parallax offset */}
@@ -153,14 +203,17 @@ const Packages = () => {
                   <p className="mb-4 text-muted-foreground">{pkg.subtitle}</p>
                   <div className="mb-6">
                     <motion.span 
+                      key={billingCycle}
                       initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.3 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4 }}
                       className="text-4xl font-bold text-foreground"
                     >
-                      {pkg.price}
+                      {formatPrice(billingCycle === "monthly" ? pkg.price + 70 : pkg.price)}
                     </motion.span>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {billingCycle === "monthly" ? "/mes" : "pago único"}
+                    </p>
                   </div>
                   <ul className="mb-8 space-y-3">
                     {pkg.features.map((feature, idx) => (
