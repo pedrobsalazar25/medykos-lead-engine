@@ -115,7 +115,7 @@ const HeroSlider = () => {
 
       {/* Mobile overlay for extra legibility */}
       <div
-        className="absolute inset-x-0 bottom-0 z-10 h-2/any from-black/70 via-black/25 to-transparent md:hidden"
+        className="absolute inset-x-0 bottom-0 z-10 h-2/3 bg-gradient-to-t from-black/70 via-black/25 to-transparent md:hidden"
         aria-hidden="true"
       />
 
