@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const navItems = [
   { label: "Servicios", href: "#servicios" },
   { label: "Paquetes", href: "#paquetes" },
+  { label: "Funcionalidades", to: "/funcionalidades" },
   { label: "Demos", href: "#demos" },
   { label: "Proceso", href: "#proceso" },
   { label: "FAQ", href: "#faq" },
   { label: "Contacto", href: "#contacto" },
 ];
+
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
