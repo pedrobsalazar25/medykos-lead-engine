@@ -11,7 +11,7 @@ const WhatsAppButton = () => {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="whatsapp-float hidden md:flex"
+      className="whatsapp-float hidden"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 2, type: "spring", stiffness: 260, damping: 20 }}
