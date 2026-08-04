@@ -1,26 +1,27 @@
 import { motion } from "framer-motion";
 import { Heart, ExternalLink } from "lucide-react";
 
-const ToothIcon = ({ className }: { className?: string }) => (
+const MolarIcon = ({ className }: { className?: string }) => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth="1.8"
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
   >
-    <path d="M12 2c2.5 0 4.5 1.5 5 4 .5 2.5 2 4 2 7 0 3.5-1.5 5-3 5.5-.5.2-1 .5-1.5 1.5-.5 1-1.5 2-2.5 2s-2-1-2.5-2c-.5-1-1-1.3-1.5-1.5-1.5-.5-3-2-3-5.5 0-3 1.5-4.5 2-7 .5-2.5 2.5-4 5-4z" />
+    <path d="M7.5 3C5 3 3 4.9 3 7.6c0 1.7.5 2.9.9 4.2.4 1.3.5 2.4.6 3.9.1 1.6.3 3 .7 3.9.3.7.8 1.2 1.4 1.2.8 0 1.2-.7 1.4-1.7.2-1 .3-2.2.5-3.1.2-1.1.9-1.8 1.9-1.8h1.2c1 0 1.7.7 1.9 1.8.2.9.3 2.1.5 3.1.2 1 .6 1.7 1.4 1.7.6 0 1.1-.5 1.4-1.2.4-.9.6-2.3.7-3.9.1-1.5.2-2.6.6-3.9.4-1.3.9-2.5.9-4.2C21 4.9 19 3 16.5 3c-1.5 0-2.4.5-3.2.9-.5.3-.9.5-1.3.5s-.8-.2-1.3-.5C9.9 3.5 9 3 7.5 3z" />
+    <path d="M9.2 8.2c.8.5 1.8.8 2.8.8s2-.3 2.8-.8" />
   </svg>
 );
 
 const demos = [
   {
     title: "Consultorio Dental",
-    url: "https://dentista.pedrobarrios.com",
+    url: "https://dentistas-demo.vercel.app/",
     description: "Demo de una clínica dental moderna con agendamiento de citas, servicios y contacto directo.",
-    icon: ToothIcon,
+    icon: MolarIcon,
     label: "Ver demo de dentista",
   },
   {
