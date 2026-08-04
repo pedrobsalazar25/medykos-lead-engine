@@ -34,6 +34,25 @@ const faqs = [
   },
 ];
 
+const paymentFaqs = [
+  {
+    question: "¿Cuál es la diferencia entre pago mensual y pago anual?",
+    answer: "El pago anual es un pago único por el precio base del paquete. El pago mensual añade $70 USD al precio base y se divide en 12 cuotas mensuales sin interés.",
+  },
+  {
+    question: "¿Qué ocurre cuando termina el período de pago?",
+    answer: "El pago anual se liquida en una sola transacción. Para conocer las condiciones de renovación o continuidad una vez finalizadas las cuotas, escríbenos por WhatsApp y te las explicamos.",
+  },
+  {
+    question: "¿Puedo cancelar antes de terminar las 12 cuotas?",
+    answer: "Las condiciones de cancelación se coordinan directamente al momento de contratar. Si tienes dudas, contáctanos por WhatsApp al +34 604 065 849 y te informamos sin compromiso.",
+  },
+  {
+    question: "¿Qué métodos de pago aceptan?",
+    answer: "Los métodos de pago disponibles se confirman al solicitar información, ya que pueden variar según la ubicación. Puedes consultarnos directamente por WhatsApp al +34 604 065 849.",
+  },
+];
+
 const FAQ = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
