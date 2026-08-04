@@ -54,6 +54,7 @@ const Index = () => {
             <Services />
             <Packages />
             <Portfolio />
+            <DemoSection />
             <Process />
             <SpecializedServices />
             <FAQ />
