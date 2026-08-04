@@ -113,6 +113,27 @@ const HeroSlider = () => {
       {/* Bottom seamless gradient into next section */}
       <div className="absolute bottom-0 left-0 right-0 z-10 h-64 bg-gradient-to-b from-transparent from-60% via-hero/90 via-80% to-[hsl(220,10%,98%)] md:h-80 lg:h-96" />
 
+      {/* Mobile overlay for extra legibility */}
+      <div
+        className="absolute inset-x-0 bottom-0 z-10 h-2/any from-black/70 via-black/25 to-transparent md:hidden"
+        aria-hidden="true"
+      />
+
+      {/* Mobile conversion message over the hero image */}
+      <div className="absolute bottom-28 left-0 right-0 z-20 flex justify-center md:hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
+          className="mx-5 flex max-w-sm items-center gap-3 rounded-2xl border border-white/10 bg-black/55 px-5 py-3 backdrop-blur-md"
+        >
+          <Sparkles className="h-5 w-5 shrink-0 text-primary" />
+          <p className="text-sm font-medium leading-snug text-white/95">
+            Más de 10 años posicionando médicos y clínicas online.
+          </p>
+        </motion.div>
+      </div>
+
       {/* Content */}
       <div className="relative z-20 flex h-full items-center">
         <div className="container mx-auto px-5 md:px-8">
