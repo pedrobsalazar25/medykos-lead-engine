@@ -62,14 +62,16 @@ const Header = () => {
 
   const scrollToSection = (href: string) => {
     if (location.pathname !== "/") {
-      navigate(`/${href}`);
+      navigate({ pathname: "/", hash: href });
       return;
     }
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      window.history.replaceState(null, "", href);
     }
   };
+
 
 
   return (
