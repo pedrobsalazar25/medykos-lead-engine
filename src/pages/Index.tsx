@@ -7,6 +7,7 @@ import Services from "@/components/Services";
 import Packages from "@/components/Packages";
 import Process from "@/components/Process";
 import Portfolio from "@/components/Portfolio";
+import DemoSection from "@/components/DemoSection";
 import SpecializedServices from "@/components/SpecializedServices";
 import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
@@ -53,6 +54,7 @@ const Index = () => {
             <Services />
             <Packages />
             <Portfolio />
+            <DemoSection />
             <Process />
             <SpecializedServices />
             <FAQ />
