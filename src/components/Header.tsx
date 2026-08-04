@@ -90,11 +90,15 @@ const Header = () => {
         >
           {/* Logo */}
           <motion.a 
-            href="#" 
+            href="/"
             className="flex items-center gap-2"
             style={{ scale: logoScale }}
             onClick={(e) => {
               e.preventDefault();
+              if (location.pathname !== "/") {
+                navigate("/");
+                return;
+              }
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
