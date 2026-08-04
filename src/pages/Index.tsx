@@ -21,9 +21,11 @@ import SplashScreen from "@/components/SplashScreen";
 const SPLASH_SHOWN_KEY = "medikos_splash_shown";
 
 const Index = () => {
+  const location = useLocation();
   const [showSplash, setShowSplash] = useState(() => {
-    // Only show splash on first visit (per session)
+    // Skip splash when deep-linking to a section, and only show once per session
     if (typeof window !== "undefined") {
+      if (window.location.hash) return false;
       return !sessionStorage.getItem(SPLASH_SHOWN_KEY);
     }
     return true;
@@ -36,11 +38,29 @@ const Index = () => {
     }
   }, [showSplash]);
 
+  // Scroll to the hash target once the page content is mounted
+  useEffect(() => {
+    if (!appReady) return;
+    if (!location.hash) return;
+    let attempts = 0;
+    const tryScroll = () => {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      if (attempts++ < 20) window.setTimeout(tryScroll, 100);
+    };
+    const id = window.setTimeout(tryScroll, 50);
+    return () => window.clearTimeout(id);
+  }, [appReady, location.hash, location.key]);
+
   const handleSplashComplete = () => {
     sessionStorage.setItem(SPLASH_SHOWN_KEY, "true");
     setShowSplash(false);
     setAppReady(true);
   };
+
 
   return (
     <div className="min-h-screen">
