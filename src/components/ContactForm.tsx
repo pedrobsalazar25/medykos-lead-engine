@@ -1,24 +1,21 @@
-import { useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Calendar, Mail, MessageSquare, User, Send } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
+import { Calendar, MessageSquare } from "lucide-react";
 
-const WHATSAPP_NUMBER = "34604065849";
-
-const contactSchema = z.object({
-  nombre: z.string().trim().min(2, "El nombre debe tener al menos 2 caracteres").max(100, "Nombre demasiado largo"),
-  email: z.string().trim().email("Email inválido").max(255, "Email demasiado largo"),
-  fecha: z.string().min(1, "Por favor selecciona una fecha"),
-  comentarios: z.string().trim().max(1000, "Comentarios demasiado largos").optional(),
-});
+const FORM_SCRIPT_ID = "leadconnector-form-embed";
 
 const ContactForm = () => {
-  const { toast } = useToast();
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (document.getElementById(FORM_SCRIPT_ID)) return;
+    const script = document.createElement("script");
+    script.id = FORM_SCRIPT_ID;
+    script.src = "https://link.msgsndr.com/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
