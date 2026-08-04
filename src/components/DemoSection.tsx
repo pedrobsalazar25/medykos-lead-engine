@@ -6,7 +6,7 @@ const demos = [
     title: "Consultorio Dental",
     url: "https://dentista.pedrobarrios.com",
     description: "Demo de una clínica dental moderna con agendamiento de citas, servicios y contacto directo.",
-    icon: Tooth,
+    icon: Smile,
     label: "Ver demo de dentista",
   },
   {
