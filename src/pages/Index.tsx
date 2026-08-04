@@ -5,7 +5,7 @@ import WhatsAppFeature from "@/components/WhatsAppFeature";
 import WhyMedykos from "@/components/WhyMedykos";
 import Services from "@/components/Services";
 import Packages from "@/components/Packages";
-import PlatformFeatures from "@/components/PlatformFeatures";
+import FeaturesTeaser from "@/components/FeaturesTeaser";
 import Process from "@/components/Process";
 import Portfolio from "@/components/Portfolio";
 import DemoSection from "@/components/DemoSection";
@@ -53,7 +53,7 @@ const Index = () => {
             <WhatsAppFeature />
             <WhyMedykos />
             <Services />
-            <PlatformFeatures />
+            <FeaturesTeaser />
             <Packages />
             <Portfolio />
             <DemoSection />
