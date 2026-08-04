@@ -45,11 +45,11 @@ const paymentFaqs = [
   },
   {
     question: "¿Puedo cancelar antes de terminar las 12 cuotas?",
-    answer: "Las condiciones de cancelación se coordinan directamente al momento de contratar. Si tienes dudas, contáctanos por WhatsApp al +34 604 065 849 y te informamos sin compromiso.",
+    answer: "Las condiciones de cancelación se coordinan directamente al momento de contratar. Si tienes dudas, contáctanos por WhatsApp al +34 604 065 849 o llámanos al <a href='tel:+584149686441' className='text-primary underline hover:text-primary/80'>+58 (0414) 968-6441</a> y te informamos sin compromiso.",
   },
   {
     question: "¿Qué métodos de pago aceptan?",
-    answer: "Los métodos de pago disponibles se confirman al solicitar información, ya que pueden variar según la ubicación. Puedes consultarnos directamente por WhatsApp al +34 604 065 849.",
+    answer: "Los métodos de pago disponibles se confirman al solicitar información, ya que pueden variar según la ubicación. Puedes consultarnos directamente por WhatsApp al +34 604 065 849 o llamarnos al <a href='tel:+584149686441' className='text-primary underline hover:text-primary/80'>+58 (0414) 968-6441</a>.",
   },
 ];
 
