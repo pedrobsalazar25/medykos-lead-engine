@@ -15,6 +15,7 @@ import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import LeadConnectorWidget from "@/components/LeadConnectorWidget";
 import BottomNav from "@/components/BottomNav";
 import SplashScreen from "@/components/SplashScreen";
 
@@ -85,6 +86,7 @@ const Index = () => {
           </main>
           <Footer />
           <WhatsAppButton />
+          <LeadConnectorWidget />
           <BottomNav />
         </>
       )}
