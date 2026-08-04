@@ -21,7 +21,7 @@ const demos = [
     title: "Consultorio Dental",
     url: "https://dentistas-demo.vercel.app/",
     description: "Demo de una clínica dental moderna con agendamiento de citas, servicios y contacto directo.",
-    icon: ToothIcon,
+    icon: MolarIcon,
     label: "Ver demo de dentista",
   },
   {
