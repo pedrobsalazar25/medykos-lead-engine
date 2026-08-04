@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const navItems = [
   { label: "Servicios", href: "#servicios" },
   { label: "Paquetes", href: "#paquetes" },
+  { label: "Demos", href: "#demos" },
   { label: "Proceso", href: "#proceso" },
   { label: "FAQ", href: "#faq" },
   { label: "Contacto", href: "#contacto" },

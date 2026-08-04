@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Home, Briefcase, Package, HelpCircle, MessageCircle } from "lucide-react";
+import { Home, Briefcase, Package, Monitor, HelpCircle, MessageCircle } from "lucide-react";
 
 const navItems = [
   { id: "inicio", label: "Inicio", icon: Home, href: "#" },
   { id: "servicios", label: "Servicios", icon: Briefcase, href: "#servicios" },
   { id: "paquetes", label: "Paquetes", icon: Package, href: "#paquetes" },
+  { id: "demos", label: "Demos", icon: Monitor, href: "#demos" },
   { id: "faq", label: "FAQ", icon: HelpCircle, href: "#faq" },
   { id: "contacto", label: "Contacto", icon: MessageCircle, href: "#contacto" },
 ];
