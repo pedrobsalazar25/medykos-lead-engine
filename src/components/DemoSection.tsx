@@ -34,7 +34,7 @@ const demos = [
 
 const DemoSection = () => {
   return (
-    <section className="section-padding bg-secondary/30 overflow-hidden">
+    <section id="demos" className="section-padding bg-secondary/30 overflow-hidden">
       <div className="container mx-auto">
         {/* Section header */}
         <motion.div
