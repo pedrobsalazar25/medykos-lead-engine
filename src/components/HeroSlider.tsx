@@ -111,7 +111,7 @@ const HeroSlider = () => {
       <div className="hero-overlay absolute inset-0 z-10" />
 
       {/* Bottom seamless gradient into next section */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 h-32 bg-gradient-to-b from-transparent via-hero/60 to-secondary/30 md:h-48" />
+      <div className="absolute bottom-0 left-0 right-0 z-10 h-64 bg-gradient-to-b from-transparent from-40% via-hero/90 via-60% to-[hsl(220,10%,98%)] md:h-80 lg:h-96" />
 
       {/* Content */}
       <div className="relative z-20 flex h-full items-center">
