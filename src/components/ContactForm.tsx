@@ -25,59 +25,6 @@ const ContactForm = () => {
   const leftColumnY = useTransform(scrollYProgress, [0, 1], [80, -40]);
   const rightColumnY = useTransform(scrollYProgress, [0, 1], [120, -20]);
 
-  const [formData, setFormData] = useState({
-    nombre: "",
-    email: "",
-    fecha: "",
-    comentarios: "",
-  });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const result = contactSchema.safeParse(formData);
-    if (!result.success) {
-      const newErrors: Record<string, string> = {};
-      result.error.errors.forEach((error) => {
-        if (error.path[0]) {
-          newErrors[error.path[0] as string] = error.message;
-        }
-      });
-      setErrors(newErrors);
-      toast({
-        title: "Error en el formulario",
-        description: "Por favor, revisa los campos marcados.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    const message = `Hola, mi nombre es ${formData.nombre}.
-Quiero solicitar una consulta gratuita con Medikos.
-
-Email: ${formData.email}
-Fecha preferida de consulta: ${formData.fecha}
-Comentarios: ${formData.comentarios || "Sin comentarios adicionales"}`;
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-
-    window.open(whatsappUrl, "_blank");
-
-    toast({
-      title: "¡Redirigiendo a WhatsApp!",
-      description: "Se abrirá una nueva pestaña con tu mensaje preparado.",
-    });
-  };
 
   return (
     <section id="contacto" ref={sectionRef} className="section-padding relative overflow-hidden">
