@@ -84,6 +84,17 @@ const Footer = () => {
         <div className="mt-12 border-t border-surface-dark-foreground/10 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 text-sm text-surface-dark-foreground/50 md:flex-row">
             <p>© {currentYear} Medikos. Todos los derechos reservados.</p>
+            <p>
+              Desarrollado por{" "}
+              <a
+                href="https://pedrobarrios.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-surface-dark-foreground"
+              >
+                Pedro Barrios
+              </a>
+            </p>
             <div className="flex gap-6">
               <button className="transition-colors hover:text-surface-dark-foreground">
                 Política de Privacidad
