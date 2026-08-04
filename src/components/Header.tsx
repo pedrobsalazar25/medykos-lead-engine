@@ -98,13 +98,20 @@ const Header = () => {
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
-                  className={`link-underline relative text-sm font-medium transition-colors ${
+                  className={`relative px-1 py-2 text-sm font-medium transition-colors duration-300 ${
                     isActive
                       ? "text-primary"
                       : "text-hero-foreground/80 hover:text-hero-foreground"
-                  } ${isActive ? "after:scale-x-100 after:origin-bottom-left" : ""}`}
+                  }`}
                 >
                   {item.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavUnderline"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-primary"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
                 </button>
               );
             })}
