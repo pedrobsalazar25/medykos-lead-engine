@@ -7,6 +7,7 @@ import BottomNav from "@/components/BottomNav";
 import PlatformFeatures from "@/components/PlatformFeatures";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import LeadConnectorWidget from "@/components/LeadConnectorWidget";
 import heroImage from "@/assets/funcionalidades-hero.jpg";
 
 const Funcionalidades = () => {
@@ -62,6 +63,7 @@ const Funcionalidades = () => {
       </main>
       <Footer />
       <WhatsAppButton />
+      <LeadConnectorWidget />
       <BottomNav />
     </div>
   );
