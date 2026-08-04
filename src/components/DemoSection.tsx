@@ -1,12 +1,26 @@
 import { motion } from "framer-motion";
-import { Smile, Heart, ExternalLink } from "lucide-react";
+import { Heart, ExternalLink } from "lucide-react";
+
+const ToothIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M12 2c2.5 0 4.5 1.5 5 4 .5 2.5 2 4 2 7 0 3.5-1.5 5-3 5.5-.5.2-1 .5-1.5 1.5-.5 1-1.5 2-2.5 2s-2-1-2.5-2c-.5-1-1-1.3-1.5-1.5-1.5-.5-3-2-3-5.5 0-3 1.5-4.5 2-7 .5-2.5 2.5-4 5-4z" />
+  </svg>
+);
 
 const demos = [
   {
     title: "Consultorio Dental",
     url: "https://dentista.pedrobarrios.com",
     description: "Demo de una clínica dental moderna con agendamiento de citas, servicios y contacto directo.",
-    icon: Smile,
+    icon: ToothIcon,
     label: "Ver demo de dentista",
   },
   {
