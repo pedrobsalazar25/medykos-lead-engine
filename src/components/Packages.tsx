@@ -209,11 +209,18 @@ const Packages = () => {
                       transition={{ duration: 0.4 }}
                       className="text-4xl font-bold text-foreground"
                     >
-                      {formatPrice(billingCycle === "monthly" ? pkg.price + 70 : pkg.price)}
+                      {billingCycle === "monthly"
+                        ? `$${Math.round((pkg.price + 70) / 12)} USD`
+                        : formatPrice(pkg.price)}
                     </motion.span>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      {billingCycle === "monthly" ? "/mes" : "pago único"}
+                      {billingCycle === "monthly" ? "/mes × 12 cuotas" : "pago único"}
                     </p>
+                    {billingCycle === "monthly" && (
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        Precio total: ${pkg.price + 70} USD
+                      </p>
+                    )}
                   </div>
                   <ul className="mb-8 space-y-3">
                     {pkg.features.map((feature, idx) => (
