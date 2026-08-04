@@ -12,8 +12,9 @@ const navItems = [
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const { scrollY } = useScroll();
-  
+
   // Transform for header shrink effect
   const headerPadding = useTransform(scrollY, [0, 100], [16, 8]);
   const logoScale = useTransform(scrollY, [0, 100], [1, 0.9]);
@@ -24,6 +25,33 @@ const Header = () => {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -60% 0px",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          if (id) {
+            setActiveSection(id);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const sections = document.querySelectorAll("section[id]");
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
   }, []);
 
   const scrollToSection = (href: string) => {
@@ -64,15 +92,22 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 md:flex">
-            {navItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className="link-underline text-sm font-medium text-hero-foreground/80 transition-colors hover:text-hero-foreground"
-              >
-                {item.label}
-              </button>
-            ))}
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.replace("#", "");
+              return (
+                <button
+                  key={item.href}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`link-underline relative text-sm font-medium transition-colors ${
+                    isActive
+                      ? "text-primary"
+                      : "text-hero-foreground/80 hover:text-hero-foreground"
+                  } ${isActive ? "after:scale-x-100 after:origin-bottom-left" : ""}`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
             <button
               onClick={() => scrollToSection("#contacto")}
               className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
