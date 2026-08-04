@@ -52,6 +52,7 @@ const Index = () => {
             <WhyMedykos />
             <Services />
             <Packages />
+            <Portfolio />
             <Process />
             <SpecializedServices />
             <FAQ />
