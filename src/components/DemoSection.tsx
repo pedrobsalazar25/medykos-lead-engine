@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Smile, Stethoscope, ExternalLink } from "lucide-react";
+import { Smile, Heart, ExternalLink } from "lucide-react";
 
 const demos = [
   {
@@ -13,7 +13,7 @@ const demos = [
     title: "Consulta Cardiológica",
     url: "https://cardiologo.pedrobarrios.com",
     description: "Demo de un consultorio cardiológico con información de servicios, estudios y contacto.",
-    icon: Stethoscope,
+    icon: Heart,
     label: "Ver demo de cardiólogo",
   },
 ];
