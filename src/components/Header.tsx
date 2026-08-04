@@ -92,15 +92,22 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 md:flex">
-            {navItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className="link-underline text-sm font-medium text-hero-foreground/80 transition-colors hover:text-hero-foreground"
-              >
-                {item.label}
-              </button>
-            ))}
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.replace("#", "");
+              return (
+                <button
+                  key={item.href}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`link-underline relative text-sm font-medium transition-colors ${
+                    isActive
+                      ? "text-primary"
+                      : "text-hero-foreground/80 hover:text-hero-foreground"
+                  } ${isActive ? "after:scale-x-100 after:origin-bottom-left" : ""}`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
             <button
               onClick={() => scrollToSection("#contacto")}
               className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
