@@ -62,14 +62,16 @@ const Header = () => {
 
   const scrollToSection = (href: string) => {
     if (location.pathname !== "/") {
-      navigate(`/${href}`);
+      navigate({ pathname: "/", hash: href });
       return;
     }
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      window.history.replaceState(null, "", href);
     }
   };
+
 
 
   return (
@@ -88,11 +90,15 @@ const Header = () => {
         >
           {/* Logo */}
           <motion.a 
-            href="#" 
+            href="/"
             className="flex items-center gap-2"
             style={{ scale: logoScale }}
             onClick={(e) => {
               e.preventDefault();
+              if (location.pathname !== "/") {
+                navigate("/");
+                return;
+              }
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >

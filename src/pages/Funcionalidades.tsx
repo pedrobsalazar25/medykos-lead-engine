@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
@@ -9,6 +10,10 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import heroImage from "@/assets/funcionalidades-hero.jpg";
 
 const Funcionalidades = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />

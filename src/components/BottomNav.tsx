@@ -65,18 +65,25 @@ const BottomNav = () => {
       return;
     }
     if (location.pathname !== "/") {
-      navigate(item.href === "#" ? "/" : `/${item.href}`);
+      if (item.href === "#") {
+        navigate("/");
+      } else {
+        navigate({ pathname: "/", hash: item.href });
+      }
       return;
     }
     if (item.href === "#") {
       window.scrollTo({ top: 0, behavior: "smooth" });
+      window.history.replaceState(null, "", "/");
       return;
     }
     const element = document.querySelector(item.href!);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      window.history.replaceState(null, "", item.href!);
     }
   };
+
 
   return (
     <motion.nav
