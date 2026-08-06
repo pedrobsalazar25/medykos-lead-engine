@@ -26,7 +26,7 @@ const demos = [
   },
   {
     title: "Consulta Cardiológica",
-    url: "https://cardiologo.pedrobarrios.com",
+    url: "https://medikos-cardiologo.vercel.app/",
     description: "Demo de un consultorio cardiológico con información de servicios, estudios y contacto.",
     icon: Heart,
     label: "Ver demo de cardiólogo",
