@@ -73,7 +73,7 @@ const WhatsAppFeature = () => {
               className="flex flex-col gap-4 sm:flex-row"
             >
               <motion.button
-                onClick={scrollToContact}
+                onClick={scrollToDemos}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="btn-hero group"
