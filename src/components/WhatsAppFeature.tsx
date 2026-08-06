@@ -3,10 +3,10 @@ import { MessageCircle, Calendar, Clock, ArrowRight } from "lucide-react";
 import whatsappMockup from "@/assets/whatsapp-appointment-mockup.png";
 
 const WhatsAppFeature = () => {
-  const scrollToContact = () => {
-    const contactSection = document.getElementById("contacto");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
+  const scrollToDemos = () => {
+    const demosSection = document.getElementById("demos");
+    if (demosSection) {
+      demosSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -73,7 +73,7 @@ const WhatsAppFeature = () => {
               className="flex flex-col gap-4 sm:flex-row"
             >
               <motion.button
-                onClick={scrollToContact}
+                onClick={scrollToDemos}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="btn-hero group"
@@ -84,7 +84,7 @@ const WhatsAppFeature = () => {
             </motion.div>
 
             <p className="mt-4 text-sm text-muted-foreground italic">
-              Prueba cómo funciona en nuestra sección de contacto ↓
+              Prueba cómo funciona en nuestra sección de demos ↓
             </p>
           </motion.div>
 
