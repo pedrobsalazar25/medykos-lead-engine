@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CalendarCheck,
@@ -264,8 +265,17 @@ const ShowcaseMockup = ({ tab }: { tab: Tab }) => (
 );
 
 const PlatformFeatures = () => {
-  const [active, setActive] = useState(tabs[0].id);
+  const [searchParams] = useSearchParams();
+  const tabParam = searchParams.get("tab");
+  const initialTab = tabs.some((t) => t.id === tabParam) ? tabParam! : tabs[0].id;
+  const [active, setActive] = useState(initialTab);
   const activeTab = tabs.find((t) => t.id === active) ?? tabs[0];
+
+  useEffect(() => {
+    if (tabParam && tabs.some((t) => t.id === tabParam)) {
+      setActive(tabParam);
+    }
+  }, [tabParam]);
 
   return (
     <section id="funcionalidades" className="section-padding bg-background">

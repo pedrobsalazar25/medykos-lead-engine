@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, Globe, Settings2, HeartPulse } from "lucide-react";
 
 const modules = [
-  { icon: Globe, title: "Sitio Web Público", text: "Reservas online, calculadora de presupuesto y blog clínico." },
-  { icon: Settings2, title: "Panel Administrativo", text: "Dashboard con KPIs, calendario médico e historias clínicas." },
-  { icon: HeartPulse, title: "Portal del Paciente", text: "Área privada con historial, gráficos de salud y facturas." },
+  { id: "sitio", icon: Globe, title: "Sitio Web Público", text: "Reservas online, calculadora de presupuesto y blog clínico." },
+  { id: "panel", icon: Settings2, title: "Panel Administrativo", text: "Dashboard con KPIs, calendario médico e historias clínicas." },
+  { id: "portal", icon: HeartPulse, title: "Portal del Paciente", text: "Área privada con historial, gráficos de salud y facturas." },
 ];
 
 const FeaturesTeaser = () => {
@@ -35,20 +35,25 @@ const FeaturesTeaser = () => {
           {modules.map((m, i) => {
             const Icon = m.icon;
             return (
-              <motion.div
+              <Link
                 key={m.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="card-service flex flex-col items-start gap-3"
+                to={`/funcionalidades?tab=${m.id}`}
+                className="group outline-none"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
-                  <Icon className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="font-heading text-lg font-bold text-foreground">{m.title}</h3>
-                <p className="leading-relaxed text-muted-foreground">{m.text}</p>
-              </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: i * 0.1 }}
+                  className="card-service flex flex-col items-start gap-3 transition-all group-hover:-translate-y-1 group-hover:shadow-lg"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 transition-colors group-hover:bg-primary/20">
+                    <Icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-heading text-lg font-bold text-foreground">{m.title}</h3>
+                  <p className="leading-relaxed text-muted-foreground">{m.text}</p>
+                </motion.div>
+              </Link>
             );
           })}
         </div>
