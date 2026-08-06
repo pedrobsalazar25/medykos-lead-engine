@@ -3,10 +3,10 @@ import { MessageCircle, Calendar, Clock, ArrowRight } from "lucide-react";
 import whatsappMockup from "@/assets/whatsapp-appointment-mockup.png";
 
 const WhatsAppFeature = () => {
-  const scrollToContact = () => {
-    const contactSection = document.getElementById("contacto");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
+  const scrollToDemos = () => {
+    const demosSection = document.getElementById("demos");
+    if (demosSection) {
+      demosSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
