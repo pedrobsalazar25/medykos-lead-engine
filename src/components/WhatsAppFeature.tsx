@@ -84,7 +84,7 @@ const WhatsAppFeature = () => {
             </motion.div>
 
             <p className="mt-4 text-sm text-muted-foreground italic">
-              Prueba cómo funciona en nuestra sección de contacto ↓
+              Prueba cómo funciona en nuestra sección de demos ↓
             </p>
           </motion.div>
 
