@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, Globe, Settings2, HeartPulse } from "lucide-react";
 
 const modules = [
-  { icon: Globe, title: "Sitio Web Público", text: "Reservas online, calculadora de presupuesto y blog clínico." },
-  { icon: Settings2, title: "Panel Administrativo", text: "Dashboard con KPIs, calendario médico e historias clínicas." },
-  { icon: HeartPulse, title: "Portal del Paciente", text: "Área privada con historial, gráficos de salud y facturas." },
+  { id: "sitio", icon: Globe, title: "Sitio Web Público", text: "Reservas online, calculadora de presupuesto y blog clínico." },
+  { id: "panel", icon: Settings2, title: "Panel Administrativo", text: "Dashboard con KPIs, calendario médico e historias clínicas." },
+  { id: "portal", icon: HeartPulse, title: "Portal del Paciente", text: "Área privada con historial, gráficos de salud y facturas." },
 ];
 
 const FeaturesTeaser = () => {
