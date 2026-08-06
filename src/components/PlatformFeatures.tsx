@@ -271,6 +271,12 @@ const PlatformFeatures = () => {
   const [active, setActive] = useState(initialTab);
   const activeTab = tabs.find((t) => t.id === active) ?? tabs[0];
 
+  useEffect(() => {
+    if (tabParam && tabs.some((t) => t.id === tabParam)) {
+      setActive(tabParam);
+    }
+  }, [tabParam]);
+
   return (
     <section id="funcionalidades" className="section-padding bg-background">
       <div className="container mx-auto">
